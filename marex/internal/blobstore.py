@@ -28,7 +28,7 @@ def remove_files(*args, **kwargs):
             try:
                 blob_key = files.blobstore.get_blob_key(arg)
                 blob_keys.append(blob_key)
-            except files.InvalidArgumentError:
+            except (files.InvalidArgumentError, files.InvalidFileNameError):
                 # this could be non-existent key, but I don't think we can tell at this point
                 # it is not worth to "verify" the key (by attempting to get BlobInfo), because
                 # we're going to delete it anyway - so we're quietly accept this
