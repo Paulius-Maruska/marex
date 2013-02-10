@@ -7,7 +7,7 @@ from google.appengine.ext import blobstore
 
 from tests.gaehelper import gaetestbed
 
-from marex.internal.blobstore import remove_files
+from marex.blobstore import remove_files
 
 
 class RemoveFilesTests(unittest.TestCase):
