@@ -8,6 +8,14 @@ def remove_files(*args, **kwargs):
     Attempts to delete all blobs identified by passed in positional arguments. Arguments can be a mixture of BlobKey,
     BlobInfo and str or unicode instances, where in case of strings it should be either a string representation of
     BlobKey or a string representation of blob URI (see google.appengine.api.files.blobstore.get_file_name() function).
+
+    :param args: One or more blob identifiers, which can be either BlobInfo, BlobKey, str or unicode objects. In case of
+        str and unicode - it has to be a string representation of BlobKey or something I call blob url (Files API
+        calls it blob filename - it's essentially a prefixed string representation of BlobKey: '/blobstore/<blob_key>').
+
+    :param kwargs: Options for the behaviour of the function. Currently available options are:
+        ignore_errors - should be boolean or anything that evaluates to boolean, when set to True - no exceptions will
+            be raised by the function (default is False).
     """
     accepted_kwargs = ['ignore_errors']
     ignore_errors = kwargs.get('ignore_errors', False)
