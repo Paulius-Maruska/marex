@@ -1,4 +1,4 @@
-application: marex_sample_1
+application: marex-sample-1
 version: main
 runtime: python27
 api_version: 1

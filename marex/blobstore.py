@@ -51,3 +51,15 @@ def remove_files(*args, **kwargs):
     blob_keys = list(blob_keys_unique)
 
     blobstore.delete(blob_keys=blob_keys)
+
+try:
+    import mapreduce
+    from mapreduce import base_handler
+
+    class RemoveFiles(base_handler.PipelineBase):
+        def run(self, *blobs):
+            remove_files(*blobs)
+
+except ImportError:
+    # I'm assuming you only want the functions, but you're not using mapreduce. Quietly ignoring errors.
+    pass

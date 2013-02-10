@@ -29,9 +29,23 @@ def _errwrite_verbose(line):
 
 def _argparser():
     parser = argparse.ArgumentParser(description='Build "marex" project examples.')
-    parser.add_argument('-v', '--verbose', dest='verbose', action='store_true', help='Provide additional output.')
-    parser.add_argument('command', choices=['clean', 'build', 'rebuild', 'test'], default='rebuild', help='Command to execute.')
-    parser.add_argument('targets', metavar='target', nargs='*', default=['all'], help='List of targets to (re)build.')
+    parser.add_argument(
+        '-v', '--verbose',
+        dest='verbose', action='store_true',
+        help='Provide additional output.'
+    )
+    parser.add_argument(
+        'command',
+        choices=['clean', 'build', 'rebuild', 'test'],
+        default='rebuild',
+        help='Command to execute.'
+    )
+    parser.add_argument(
+        'targets',
+        metavar='target', nargs='*',
+        default=['all'],
+        help='List of targets to (re)build.'
+    )
     return parser
 
 
@@ -75,6 +89,10 @@ def build(*args):
         source_path = os.path.join(EXAMPLES_PATH, name)
         target_path = os.path.join(BUILD_PATH, name)
         shutil.copytree(source_path, target_path)
+
+        blobstore_path = os.path.join(target_path, '_blobstore')
+        if not os.path.exists(blobstore_path):
+            os.makedirs(blobstore_path)
 
         for library, library_source_path in LIBRARIES.items():
             library_target_path = os.path.join(target_path, library)
